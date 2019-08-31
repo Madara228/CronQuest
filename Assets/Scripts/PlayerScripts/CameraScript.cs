@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CameraScript : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class CameraScript : MonoBehaviour
     private Vector3 _velocity = Vector3.zero;
     [SerializeField]
     private Camera _mainCamera;
+    public TextMeshProUGUI keysText;
     private void Start()
     {
         _mainCamera = GetComponent<Camera>();
@@ -27,14 +29,19 @@ public class CameraScript : MonoBehaviour
 
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
-            if (Physics2D.Raycast(worldPoint,Vector2.zero))
+            if (Physics2D.Raycast(worldPoint, Vector2.zero))
             {
+                Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.tag == "Key")
                 {
-                    var scr = hit.collider.gameObject.GetComponent<GetKeyScript>();
-                    Debug.Log(scr.KeyNumber1);
+                    if (hit.collider.gameObject.GetComponent<GetKeyScript>() != null)
+                    {
+                        var scr = hit.collider.gameObject.GetComponent<GetKeyScript>();
+                        keysText.text += scr.KeyNumber1;
+                    }
                 }
             }
         }
+        }
+
     }
-}

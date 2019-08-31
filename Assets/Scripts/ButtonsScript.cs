@@ -17,14 +17,12 @@ public class ButtonsScript : MonoBehaviour
     }
     public void GetText()
     {
-        if (m_text_1.text != questScripts.rightAnswer) { 
-            Debug.Log(questScripts.rightAnswer);
-            Debug.Log("Не то");
+        if (m_text_1.text != questScripts.rightAnswer) {
             questScripts.voidWriteText("Не то!");
         }
         else
         {
-            questScripts.voidWriteText("В точку!");
+            Right();
         }
     }
     public void GetText2()
@@ -35,7 +33,7 @@ public class ButtonsScript : MonoBehaviour
         }
         else
         {
-            questScripts.voidWriteText("В точку!");
+            Right();
         }
     }
     public void GetText3()
@@ -46,7 +44,7 @@ public class ButtonsScript : MonoBehaviour
         }
         else
         {
-            questScripts.voidWriteText("В точку!");
+            Right();
         }
     }
     public void GetText4()
@@ -57,7 +55,19 @@ public class ButtonsScript : MonoBehaviour
         }
         else
         {
-            questScripts.voidWriteText("В точку!");
+            Right();
         }
+    }
+    void Right()
+    {
+        questScripts.voidWriteText("В точку!");
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().speed = 300f;
+        StartCoroutine(destroySelf());
+    }
+    
+    IEnumerator destroySelf()
+    {
+        yield return new WaitForSeconds(2f); 
+        Destroy(questScripts.gameObject);
     }
 }

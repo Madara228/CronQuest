@@ -48,6 +48,12 @@ public class QuestScripts : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             StartCoroutine(writeText(Quest_txt));
+            collision.gameObject.GetComponent<PlayerScript>().speed = 0f;
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                buttons[i].gameObject.SetActive(true);
+                Debug.Log("1234");
+            }
         }
     }
 
@@ -61,9 +67,17 @@ public class QuestScripts : MonoBehaviour
             yield return new WaitForSeconds(0.03f);
         }
     }
-    public void voidWriteText(string text)
+    public void voidWriteText(string text)  
     {
         StartCoroutine(writeText(text));
+    }
+
+    public void DisableButtons()
+    {
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].gameObject.SetActive(false);
+        }
     }
     
 }

@@ -20,8 +20,7 @@ public class KeysScripts : MonoBehaviour
         s = inputField.text;
         if(s == rightAnswer)
         {
-            door.GetComponent<BoxCollider2D>().isTrigger = true;
-            door.GetComponent<SpriteRenderer>().sprite = _sprite;  
+            Destroy(door);
         }
     }
 }
